@@ -20,7 +20,7 @@ class Decorator():
 
             #this can be replaced with any side effect
             np.save(filename, r.data.numpy())
-
             return r
+
         return wrapper
 
