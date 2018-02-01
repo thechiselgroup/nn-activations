@@ -1,6 +1,6 @@
 const homedir = require('homedir')
 
-export const fileLocations = {
+exports.fileLocations = {
     imagePath : homedir() + '/.cache/Lodestone/neuralNet/uploads/',
     destinationPath : homedir() + '/.cache/Lodestone/neuralNet/activations/',
     classificationPath : homedir() + '/.cache/Lodestone/neuralNet/classification/',
