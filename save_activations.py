@@ -20,8 +20,8 @@ pre_transform = transforms.Compose([
     torchvision.transforms.ToTensor(),
     normalize])
 
-def extract_activations(filename, destFolder):
-    temp = Image.open(filename)
+def extract_activations(imageFile, classificationFolder):
+    temp = Image.open(imageFile)
     im = temp.copy()
     temp.close()
     im = pre_transform(im)
@@ -31,20 +31,30 @@ def extract_activations(filename, destFolder):
     in_ = Variable(im.unsqueeze(0))
     activations = model(in_)
 
-    saveTop5AsJSON(activations, destFolder)
+    saveTop5AsJSON(activations, classificationFolder)
     return activations
 
 if __name__ == "__main__":
-    if(len(sys.argv) < 3):
-        print "Usage: save_activations.py <image path> <destination path>"
+    if(len(sys.argv) < 4):
+        print "Usage: save_activations.py <image path> <activation files path> <classification json file>"
         sys.exit(1)
 
     destFolder = sys.argv[2]
+    classificationFolder = sys.argv[3]
     try:
         os.makedirs(destFolder)
     except OSError:
         if not os.path.isdir(destFolder):
             raise
 
-    extract_activations(sys.argv[1], destFolder)
+
+    try:
+        os.makedirs(classificationFolder)
+    except OSError:
+        if not os.path.isdir(classificationFolder):
+            raise
+
+
+
+    extract_activations(sys.argv[1], classificationFolder)
 
