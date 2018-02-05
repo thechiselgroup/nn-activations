@@ -32,8 +32,8 @@ check_python((err, pythonPath, ver) => {
 
 exports.classifyImage = (imageFileName, imageID) => {
 	return new Promise((resolve, reject) => {
-		fileLocations.destinationPath = path.join(fileLocations.cachePath, 'activations', imageID, '/')
-		fileLocations.classificationPath = path.join(fileLocations.cachePath, 'classifications', imageID, '/')
+		fileLocations.destinationPath = path.join(fileLocations.cachePath, imageID, 'activations/')
+		fileLocations.classificationPath = path.join(fileLocations.cachePath, imageID,'classifications/')
 
 		const saveActivations = child_process.spawn(python, [fileLocations.pythonPath, imageFileName, fileLocations.destinationPath, fileLocations.classificationPath])
 
