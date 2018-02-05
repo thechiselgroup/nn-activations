@@ -6,8 +6,7 @@ const path = require('path')
 const check_python = require('check-python')
 
 const fileLocations = {
-    destinationPath : homedir() + '/.cache/Lodestone/neuralNet/activations/',
-    classificationPath : homedir() + '/.cache/Lodestone/neuralNet/classification/',
+	cachePath : homedir() + '/.cache/Lodestone/neuralNet/',
     pythonPath : path.resolve(__dirname, 'save_activations.py')
 }
 
@@ -31,11 +30,10 @@ check_python((err, pythonPath, ver) => {
 	})
 })
 
-exports.classifyImage = (imageFileName) => {
+exports.classifyImage = (imageFileName, imageID) => {
 	return new Promise((resolve, reject) => {
-		imageHash = imageFileName.slice(-32)
-		fileLocations.destinationPath.concat(imageHash, '/')
-		fileLocations.classificationPath.concat(imageHash, '/')
+		fileLocations.destinationPath = path.join(fileLocations.cachePath, 'activations', imageID, '/')
+		fileLocations.classificationPath = path.join(fileLocations.cachePath, 'classifications', imageID, '/')
 
 		const saveActivations = child_process.spawn(python, [fileLocations.pythonPath, imageFileName, fileLocations.destinationPath, fileLocations.classificationPath])
 

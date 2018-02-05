@@ -1,6 +1,6 @@
 {
   "name": "@thechiselgroup/nn-activations",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": " Runs Alexnet neural network model on an image. Saves the activations data for each layer, as well as the top 5 classifications and their probability.",
   "main": "index.js",
   "scripts": {
