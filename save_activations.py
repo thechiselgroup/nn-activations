@@ -36,7 +36,7 @@ def extract_activations(imageFile, classificationFolder):
 
 if __name__ == "__main__":
     if(len(sys.argv) < 4):
-        print "Usage: save_activations.py <image path> <activation files path> <classification json file>"
+        print "Usage: save_activations.py <image path> <activation files path> <classification json path>"
         sys.exit(1)
 
     destFolder = sys.argv[2]
@@ -47,14 +47,11 @@ if __name__ == "__main__":
         if not os.path.isdir(destFolder):
             raise
 
-
     try:
         os.makedirs(classificationFolder)
     except OSError:
         if not os.path.isdir(classificationFolder):
             raise
-
-
 
     extract_activations(sys.argv[1], classificationFolder)
 
